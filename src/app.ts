@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import status from 'http-status';
 import cookieParser from 'cookie-parser' ;
+import router from './app/routers';
 // import router from './app/routers';
 
 
@@ -22,7 +23,7 @@ app.get('/',(req:Request,res:Response)=>{
        });
 });
 
-// app.get('/api/v1',router)
+app.use('/api/v1',router)
 
 
 
