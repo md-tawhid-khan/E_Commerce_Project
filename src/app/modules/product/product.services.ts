@@ -5,7 +5,7 @@ const createProduct = async (payload:TProduct) => {
 
     const sku = payload.sku ;
 
-    const isAlreadyExistSku = await prisma.product.findUniqueOrThrow({
+    const isAlreadyExistSku = await prisma.product.findUnique({
         where:{
             sku : sku 
         }
@@ -28,6 +28,17 @@ const getAllProduct = async()=>{
     const result = await prisma.product.findMany();
     return result ;
 } ;
+
+// get single product ----------
+
+const getSingleProduct = async(productId :string) =>{
+    const result = await prisma.product.findUniqueOrThrow({
+        where:{
+            id : productId 
+        }
+    }) ;
+    return result ;
+}
 
 // update product -------
 
@@ -59,6 +70,7 @@ const deleteProduct = async (productId:string) =>{
 export const productServices ={
     createProduct,
     getAllProduct,
+    getSingleProduct,
     updateProduct,
     deleteProduct
 }

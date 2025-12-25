@@ -17,7 +17,7 @@ const createProduct = async (req:Request,res:Response)=>{
         res.send({
         status:status[404],
         success:false,
-        message : " failed to registration  ",
+        message : " failed to create product ",
         data : error.message 
     }) ;  
     }
@@ -43,6 +43,29 @@ const getAllProduct = async (req:Request,res:Response)=>{
     }) ;
     }
 }
+
+// get single product -----------
+
+const getSingleProduct = async(req:Request, res:Response) => {
+     try {
+        const productId = req.params.id as string ;
+        const result = await productServices.getSingleProduct(productId)
+        res.send({
+        status:status.OK,
+        success:true,
+        message : "product retrive successfully ",
+        data : result 
+    }) ;
+        
+     } catch (error:any) {
+         res.send({
+        status:status[404],
+        success:false,
+        message : " failed to get specific  product  ",
+        data : error.message 
+    }) ;
+     }
+} ;
 
 // udpate product --------
 
@@ -93,6 +116,7 @@ const deleteProduct = async (req:Request, res:Response)=>{
 export const productController = {
     createProduct,
     getAllProduct,
+    getSingleProduct,
     updateProduct,
     deleteProduct
 }
