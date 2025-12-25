@@ -28,7 +28,17 @@ const paymentInitialization = async()=>{
 
 // console.log(paymentIntent) ;
 
+const paymentInfo = await prisma.payment.create({
+    data:{
+        order_id:orderInfo?.id ,
+        provider : "stripe",
+        transaction_id :paymentIntent.id,
+        status : paymentStatus.PENDING,
+        raw_response: JSON.parse(JSON.stringify(paymentIntent)),
+    }
+})
 
+// console.log(paymentInfo);
 
 }
 export const paymentServices = {
