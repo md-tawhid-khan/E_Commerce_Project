@@ -21,6 +21,14 @@ const createProduct = async (payload:TProduct) => {
      return result ;
 } ;
 
+// get all product ------
+ 
+const getAllProduct = async()=>{
+    console.log("get all products") ;
+    const result = await prisma.product.findMany();
+    return result ;
+} ;
+
 // update product -------
 
 const updateProduct = async (payload : TUpdateProduct,productId : string) =>{
@@ -50,6 +58,7 @@ const deleteProduct = async (productId:string) =>{
 }
 export const productServices ={
     createProduct,
+    getAllProduct,
     updateProduct,
     deleteProduct
 }

@@ -23,6 +23,27 @@ const createProduct = async (req:Request,res:Response)=>{
     }
 } ;
 
+// get all product ----------
+
+const getAllProduct = async (req:Request,res:Response)=>{
+    try {
+        const result = await productServices.getAllProduct();
+          res.send({
+        status:status.OK,
+        success:true,
+        message : "product retrive successfully ",
+        data : result 
+    }) ;
+    } catch (error:any) {
+        res.send({
+        status:status[404],
+        success:false,
+        message : " failed to get all product  ",
+        data : error.message 
+    }) ;
+    }
+}
+
 // udpate product --------
 
 const updateProduct = async(req:Request,res:Response)=>{
@@ -71,6 +92,7 @@ const deleteProduct = async (req:Request, res:Response)=>{
 
 export const productController = {
     createProduct,
+    getAllProduct,
     updateProduct,
     deleteProduct
 }
