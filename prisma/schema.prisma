@@ -53,6 +53,7 @@ model Order {
   updatedAt DateTime @updatedAt
 
   orderItem OrderItem []
+  payment Payment?
   
   @@map("orders")
 }
@@ -70,6 +71,25 @@ model OrderItem {
   @@map("orderItems")
 }
 
+model Payment {
+  id String @id @default(uuid())
+  order_id String @unique
+  order Order @relation(fields: [order_id], references: [id])
+  provider String 
+  transaction_id String @unique
+  status paymentStatus @default(PENDING)
+  raw_response Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("payments")
+}
+
+enum paymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
 
 enum orderStatus {
   PENDING
