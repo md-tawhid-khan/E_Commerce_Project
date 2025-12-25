@@ -15,7 +15,7 @@ const authLongin = async (req:Request,res:Response) =>{
     }) ;
     } catch (error : any) {
           res.send({
-        status:status[403],
+        status:status[404],
         success:false,
         message : " failed to log in  ",
         data : error.message 

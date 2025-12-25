@@ -1,3 +1,4 @@
+import  bcrypt  from 'bcrypt';
 import { prisma } from "../../../lib/prisma";
 import { generateToken } from "../../helper/tokenHelper";
 import { TAuth } from "./auth.interface";
@@ -14,13 +15,9 @@ const authLongin= async (payload:TAuth) =>{
       throw new Error ("you have no registered account !") ;
     } ;
 
-   let isCorrectPassword ;
-   if(payload.password === userData.password){
-     isCorrectPassword = true ;
-   }
-
+   const isCorrectPassword:boolean= await bcrypt.compare(payload.password,userData?.password as string);
    if(!isCorrectPassword){
-    throw new Error ("password is not correct") ;
+    throw new Error("password is incorrect");
    }
     
     const payloadData={
