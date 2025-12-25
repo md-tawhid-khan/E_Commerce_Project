@@ -22,6 +22,8 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  order Order ?
+
   @@map("users")
 }
 
@@ -39,6 +41,24 @@ model Product {
   @@map("products")
 }
 
+model Order {
+  id  String @id @default(uuid())
+  user_id String @unique
+  user User @relation(fields: [user_id],references: [id])
+  totalAmount Int 
+  status  orderStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("orders")
+}
+
+
+enum orderStatus {
+  PENDING
+  PAID
+  CANCELED
+}
 
 enum userRole {
   ADMIN 
