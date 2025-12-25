@@ -26,6 +26,7 @@ const createUser= async (user:TUser)=>{
         password : hashedPassword 
     } as TUser ;
     const result = await prisma.user.create({data:userData});
+    
     return result ;
    
 }

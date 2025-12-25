@@ -4,11 +4,13 @@ import status from "http-status";
 
 const createProduct = async (req:Request,res:Response)=>{
     try {
-        const result = await productServices.createProduct() ;
+        const productData = req.body.data ;
+        // console.log(productData) ;
+        const result = await productServices.createProduct(productData) ;
         res.send({
         status:status.OK,
         success:true,
-        message : " user registration  successful ",
+        message : "product create successfully ",
         data : result 
     }) ;
     } catch (error:any) {
