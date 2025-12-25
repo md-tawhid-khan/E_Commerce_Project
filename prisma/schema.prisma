@@ -52,14 +52,14 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  orderItem OrderItem ?
+  orderItem OrderItem []
   
   @@map("orders")
 }
 
 model OrderItem {
   id String @id @default(uuid())
-  order_id String @unique
+  order_id String 
   order Order @relation(fields: [order_id], references: [id])
   product_id String 
   product Product @relation(fields: [product_id],references: [id])

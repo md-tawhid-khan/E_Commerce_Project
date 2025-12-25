@@ -10,11 +10,13 @@ const createUser= async (user:TUser)=>{
     // console.log(user) ;
     const {password,email} = user ;
 
-    const isEmailExist = prisma.user.findUniqueOrThrow({where:{
+    const isEmailExist =await prisma.user.findUnique({where:{
             email:email,           
         }})
 
-        if((await isEmailExist).email){
+        
+
+        if(isEmailExist){
             throw new Error("you have allready an account");
         }
 
