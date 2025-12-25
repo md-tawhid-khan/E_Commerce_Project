@@ -38,6 +38,8 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  orderItem OrderItem[]
+
   @@map("products")
 }
 
@@ -49,8 +51,23 @@ model Order {
   status  orderStatus @default(PENDING)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  orderItem OrderItem ?
   
   @@map("orders")
+}
+
+model OrderItem {
+  id String @id @default(uuid())
+  order_id String @unique
+  order Order @relation(fields: [order_id], references: [id])
+  product_id String 
+  product Product @relation(fields: [product_id],references: [id])
+  quantity Int
+  price Int 
+  subtotal Int
+
+  @@map("orderItems")
 }
 
 
