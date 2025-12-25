@@ -11,7 +11,7 @@ const authLongin= async (payload:TAuth) =>{
         }
     }) ;
     if(!userData){
-       return ("you have no registered account !") ;
+      throw new Error ("you have no registered account !") ;
     } ;
 
    let isCorrectPassword ;
@@ -20,7 +20,7 @@ const authLongin= async (payload:TAuth) =>{
    }
 
    if(!isCorrectPassword){
-    return "password is not correct" ;
+    throw new Error ("password is not correct") ;
    }
     
     const payloadData={
@@ -31,9 +31,11 @@ const authLongin= async (payload:TAuth) =>{
      
  const accessToken =await generateToken(payloadData);
  
- console.log(accessToken) ;
+//  console.log(accessToken) ;
  
-    return "you have no registered account !"
+    return {
+        accessToken
+    }
 }
 
 export const authServices = {

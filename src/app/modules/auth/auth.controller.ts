@@ -1,13 +1,28 @@
 import { Request, Response } from "express";
 import { authServices } from "./auth.services";
+import status from "http-status";
 
 const authLongin = async (req:Request,res:Response) =>{
-    const loginData = req.body.data ;
+    try {
+        const loginData = req.body.data ;
     
     const result = await authServices.authLongin(loginData);
-    res.send(result) ;
+    res.send({
+        status:status.OK,
+        success:true,
+        message : " log in successfully ",
+        data : result 
+    }) ;
+    } catch (error : any) {
+          res.send({
+        status:status[403],
+        success:false,
+        message : " failed to log in  ",
+        data : error.message 
+    }) ;
+    }
 } ;
 
 export const authController = {
     authLongin
-}
+} ;
