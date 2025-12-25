@@ -23,6 +23,8 @@ const createProduct = async (req:Request,res:Response)=>{
     }
 } ;
 
+// udpate product --------
+
 const updateProduct = async(req:Request,res:Response)=>{
     try {
         const productId = req.params.id as string;
@@ -45,7 +47,30 @@ const updateProduct = async(req:Request,res:Response)=>{
     }
 }
 
+// delete product --------------
+
+const deleteProduct = async (req:Request, res:Response)=>{
+    try {
+        const productId = req.params.id as string;
+    const result = await productServices.deleteProduct(productId) ;
+      res.send({
+        status:status.OK,
+        success:true,
+        message : "product delete successfully ",
+        data : result 
+    }) ;
+    } catch (error:any) {
+          res.send({
+        status:status[404],
+        success:false,
+        message : " failed to delete  ",
+        data : error.message 
+    }) ;
+    }
+}
+
 export const productController = {
     createProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }

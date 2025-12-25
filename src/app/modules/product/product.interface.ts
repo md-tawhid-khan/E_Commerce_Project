@@ -7,4 +7,6 @@ export type TProduct = {
     price : number , 
     stock : number , 
     status : productStatus
-}
+} ;
+
+export type TUpdateProduct = Partial<TProduct>

@@ -1,5 +1,5 @@
 import { prisma } from "../../../lib/prisma";
-import { TProduct } from "./product.interface";
+import { TProduct, TUpdateProduct } from "./product.interface";
 
 const createProduct = async (payload:TProduct) => {
 
@@ -21,7 +21,9 @@ const createProduct = async (payload:TProduct) => {
      return result ;
 } ;
 
-const updateProduct = async (payload : any,productId : string) =>{
+// update product -------
+
+const updateProduct = async (payload : TUpdateProduct,productId : string) =>{
     // console.log(payload) ;
     // console.log(productId) ;
     const result = await prisma.product.update({
@@ -35,8 +37,19 @@ const updateProduct = async (payload : any,productId : string) =>{
     return result ;
 }
 
+// delete product -------------
 
+const deleteProduct = async (productId:string) =>{
+    const result = await prisma.product.delete({
+        where:{
+            id : productId
+        }
+    }) ;
+
+    return result ;
+}
 export const productServices ={
     createProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }
