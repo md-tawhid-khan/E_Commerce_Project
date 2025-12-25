@@ -19,9 +19,24 @@ const createProduct = async (payload:TProduct) => {
         data:payload
     })
      return result ;
+} ;
+
+const updateProduct = async (payload : any,productId : string) =>{
+    // console.log(payload) ;
+    // console.log(productId) ;
+    const result = await prisma.product.update({
+        where:{
+            id:productId
+        },
+        data:{
+           ...payload
+        }
+    }) ;
+    return result ;
 }
 
 
 export const productServices ={
-    createProduct
+    createProduct,
+    updateProduct
 }

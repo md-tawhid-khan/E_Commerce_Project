@@ -23,6 +23,29 @@ const createProduct = async (req:Request,res:Response)=>{
     }
 } ;
 
+const updateProduct = async(req:Request,res:Response)=>{
+    try {
+        const productId = req.params.id as string;
+        
+        const updateData = req.body.data ;
+         const result = await productServices.updateProduct(updateData,productId) ;
+        res.send({
+        status:status.OK,
+        success:true,
+        message : "product update successfully ",
+        data : result 
+    }) ;
+    } catch (error :any) {
+           res.send({
+        status:status[404],
+        success:false,
+        message : " failed to update  ",
+        data : error.message 
+    }) ;
+    }
+}
+
 export const productController = {
-    createProduct
+    createProduct,
+    updateProduct
 }
