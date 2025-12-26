@@ -3,6 +3,8 @@ import { paymentController } from "./payment.controller";
 
 const router = Router() ;
 
-router.post('/payment_intents',paymentController.paymentInitialization) ;
+router.post('/:id/payment_intents',paymentController.paymentInitialization) ;
+
+router.post('/verify',paymentController.verifyPayment)
 
 export const paymentRouter = router ;

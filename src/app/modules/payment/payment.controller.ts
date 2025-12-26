@@ -4,23 +4,45 @@ import status from "http-status";
 
 const paymentInitialization = async(req:Request, res:Response) =>{
     try {
-        const result = await paymentServices.paymentInitialization();
+        const orderId=req.params.id as string ;
+        const result = await paymentServices.paymentInitialization(orderId);
           res.send({
         status:status.OK,
         success:true,
-        message : " order is created successful ",
+        message : " create client secret successfully ",
         data : result 
     }) ; 
     } catch (error:any) {
          res.send({
         status:status[404],
         success:false,
-        message : " failed to create order  ",
+        message : " failed to create client secret  ",
         data : error.message 
     }) ;
     } ;
 } ;
 
+const verifyPayment = async(req:Request,res:Response)=>{
+       try {
+    const { paymentIntent } = req.body
+
+    const result = await paymentServices.verifyPayment(paymentIntent)
+
+    res.status(200).json({
+      success: true,
+      message: "Payment verified successfully",
+      data: result,
+    })
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    })
+  }
+
+}
+
 export const paymentController ={
-    paymentInitialization
+    paymentInitialization,
+    verifyPayment
 } ;
