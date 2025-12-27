@@ -7,5 +7,7 @@ const router = Router() ;
 
 
 router.post("/create-Order", authTokenValidation(userRole.USER), orderController.createOrder) ;
+router.get("/my-order", authTokenValidation(userRole.USER), orderController.getMyOrder) ;
+
 
 export const orderRouter = router ;

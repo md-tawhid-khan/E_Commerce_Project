@@ -26,6 +26,29 @@ const createOrder = async (req:Request,res:Response)=>{
     }
 } ;
 
+const getMyOrder = async (req:Request,res:Response)=>{
+    try {
+        const userEmail = req?.user?.data?.email ;
+        
+         const result = await orderServices.getMyOrder(userEmail) ;
+          res.send({
+        status:status.OK,
+        success:true,
+        message : "my order retrive successfully ",
+        data : result 
+    }) ;
+
+    } catch (error:any) {
+         res.send({
+        status:status[404],
+        success:false,
+        message : " failed to create order  ",
+        data : error.message 
+    }) ;
+    }
+}
+
 export const orderController = {
-    createOrder
+    createOrder,
+    getMyOrder
 }

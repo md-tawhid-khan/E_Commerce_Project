@@ -4,8 +4,6 @@ import { userRole } from "../generated/prisma/enums";
 import { prisma } from "../src/lib/prisma";
 
 
-
-
 const seedAdmin = async () => {
   const isAdminExist = await prisma.user.findFirst({
     where: { role: userRole.ADMIN },

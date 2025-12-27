@@ -61,6 +61,27 @@ const createOrder = async (orderData:any, userEmail : string) =>{
   
 } ;
 
+const getMyOrder = async(userEmail:string)=>{
+    // console.log(userEmail) ;
+    const isExistUser = await prisma.user.findUnique({
+        where:{
+            email:userEmail
+        }
+    }) ;
+    if(!isExistUser){
+        throw new Error("you are not authorized user") ;
+    } ;
+
+    const myOrder = await prisma.order.findMany({
+        where:{
+            user_id:isExistUser.id
+        }
+    }) ;
+  
+    return myOrder ;
+}
+
 export const orderServices = {
-    createOrder
+    createOrder,
+    getMyOrder
 } ;
