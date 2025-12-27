@@ -4,13 +4,11 @@ import config from '../config';
 import status from 'http-status';
 
 
-export let userInformation : any ; 
+// export let userInformation : any ; 
 
 const authTokenValidation= (...userRoles:string[])=>{
 
-
-
-  return async(req:Request ,res:Response,next:NextFunction)=>{
+  return async(req:Request  ,res:Response,next:NextFunction)=>{
        try {
 
         const  token=req.headers.authorization ;
@@ -24,7 +22,7 @@ const authTokenValidation= (...userRoles:string[])=>{
        
       //  console.log(verifiedUser) ;
 
-       userInformation=verifiedUser ;
+       req.user=verifiedUser ;
 
        if(userRoles && !userRoles.includes(verifiedUser?.data?.role )){
          return res.status(403).json({

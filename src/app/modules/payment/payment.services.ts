@@ -6,22 +6,18 @@ import { paymentStatus } from "../../../../generated/prisma/enums";
 const stripe = new Stripe(config.stripe_secret as string);
 
 const paymentInitialization = async(orderId:string)=>{
-    
-    // console.log(stripe) ;
 
     const orderInfo = await prisma.order.findFirst({
         where:{
             id:orderId
         }}
         )
-        // console.log(orderInfo);
-
         if (!orderInfo?.id) {
   throw new Error("Order ID is missing");
 }
 
     const paymentIntent: Stripe.Response<Stripe.PaymentIntent> = await stripe.paymentIntents.create({
-  amount: orderInfo?.totalAmount as number,
+  amount: orderInfo?.totalAmount * 100 as number,
   currency: 'usd',
   automatic_payment_methods: {
     enabled: true,

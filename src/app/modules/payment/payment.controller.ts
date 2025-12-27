@@ -2,9 +2,12 @@ import { Request, Response } from "express";
 import { paymentServices } from "./payment.services";
 import status from "http-status";
 
+
 const paymentInitialization = async(req:Request, res:Response) =>{
     try {
-        const orderId=req.params.id as string ;
+      
+        const orderId=req.query.order_id as string ;
+       
         const result = await paymentServices.paymentInitialization(orderId);
           res.send({
         status:status.OK,

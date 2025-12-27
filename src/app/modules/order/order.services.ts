@@ -1,3 +1,4 @@
+
 import { prisma } from "../../../lib/prisma";
 
 const createOrder = async (orderData:any, userEmail : string) =>{
@@ -14,7 +15,7 @@ const createOrder = async (orderData:any, userEmail : string) =>{
         throw new Error("you are not authorized user") ;
      }
 
-     
+// start create order page generate 
 
          const generateOrder = await tx.order.create({
             data:{
@@ -28,7 +29,7 @@ const createOrder = async (orderData:any, userEmail : string) =>{
         product_id:product.product_id,
         quantity:product.quantity,
         price:product.price,
-        subtotal:product.quantity * product.price 
+        subtotal:product.quantity * product.price  
     })) ;
 
      await tx.orderItem.createMany({
@@ -50,6 +51,7 @@ const createOrder = async (orderData:any, userEmail : string) =>{
             totalAmount: calculateTotalAmount._sum.subtotal ?? 0          
         }
     })
+
          
          return updateOrder ;
     }) ;

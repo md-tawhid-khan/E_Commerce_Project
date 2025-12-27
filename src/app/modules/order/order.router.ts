@@ -5,6 +5,7 @@ import { userRole } from "../../../../generated/prisma/enums";
 
 const router = Router() ;
 
-router.post("/create-Order",authTokenValidation(userRole.USER), orderController.createOrder) ;
+
+router.post("/create-Order", authTokenValidation(userRole.USER), orderController.createOrder) ;
 
 export const orderRouter = router ;
