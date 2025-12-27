@@ -2,13 +2,17 @@
 import bodyParser from "body-parser"
 import { Router } from "express";
 import { paymentController } from "./payment.controller";
+import authTokenValidation from "../../middleware/authTokenValidation";
+import { userRole } from "../../../generated/prisma/enums";
 
 const router = Router() ;
 
 router.post('/payment_intents',paymentController.paymentInitialization) ;
 
-router.post('/verify',paymentController.verifyPayment)
+router.post('/verify',paymentController.verifyPayment) ;
 
 router.post('/webhook',  bodyParser.raw({ type: "application/json" }),paymentController.webhookIntrigation) ;
+
+router.get('/my-payment', authTokenValidation(userRole.USER),paymentController.getMyPayment) ;
 
 export const paymentRouter = router ;

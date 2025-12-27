@@ -133,11 +133,36 @@ const webhookIntrigation = async(payload:any,sig:any)=>{
 
   return {receive:true}
   
+} ;
+
+const getMyPayment = async (userEmail:string) =>{
+  const isExistUser=await prisma.user.findUnique({
+    where:{
+      email:userEmail
+    }
+  }) ;
+  if(!isExistUser){
+    throw new Error("you are not authorized user ") ;
+  } ;
+
+  const myPaymentInfo = await prisma.payment.findMany({
+    where:{
+      order:{
+        user_id:isExistUser.id
+      }
+    }
+  })
+
+
+
+  return myPaymentInfo ;
+
 }
 
 
 export const paymentServices = {
     paymentInitialization,
     verifyPayment,
-    webhookIntrigation
+    webhookIntrigation,
+    getMyPayment
 }

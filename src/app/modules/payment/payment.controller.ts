@@ -64,10 +64,31 @@ try{
       message: error.message,
     })
   }
+} ;
+
+const getMyPayment = async (req:Request, res:Response) =>{
+  try {
+    const userEmail = req?.user?.data?.email ;
+      const result = await paymentServices.getMyPayment(userEmail) ;
+      res.send({
+        status:status.OK,
+        success:true,
+        message : "my payment data retrieve successfully ",
+        data : result 
+    }) ;
+  } catch (error:any) {
+    res.send({
+        status:status[404],
+        success:false,
+        message : " failed to retrieve my payment data  ",
+        data : error.message 
+    }) ;
+  }
 }
 
 export const paymentController ={
     paymentInitialization,
     verifyPayment,
-    webhookIntrigation
+    webhookIntrigation,
+    getMyPayment
 } ;
