@@ -43,5 +43,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
-  "exclude": ["generated","prisma.config.ts"]
+  "exclude": ["generated","prisma","prisma.config.ts"]
 }
