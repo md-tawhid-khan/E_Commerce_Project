@@ -7,6 +7,12 @@ const authLongin = async (req:Request,res:Response) =>{
         const loginData = req.body.data ;
     
     const result = await authServices.authLongin(loginData);
+    res.cookie("accessToken", result.accessToken, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "none", 
+  maxAge: 24 * 60 * 60 * 1000, 
+});
     res.send({
         status:status.OK,
         success:true,

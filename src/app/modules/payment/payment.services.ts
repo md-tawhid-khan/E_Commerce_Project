@@ -135,6 +135,16 @@ const webhookIntrigation = async(payload:any,sig:any)=>{
   
 } ;
 
+//  --------- bkash payment intregation   ------------------
+
+const createBkashPayment=async()=>{
+  console.log("create payment")
+}
+
+
+
+// ----------------------------
+
 const getMyPayment = async (userEmail:string) =>{
   const isExistUser=await prisma.user.findUnique({
     where:{
@@ -164,5 +174,6 @@ export const paymentServices = {
     paymentInitialization,
     verifyPayment,
     webhookIntrigation,
-    getMyPayment
+    getMyPayment,
+    createBkashPayment
 }

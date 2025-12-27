@@ -66,6 +66,10 @@ try{
   }
 } ;
 
+//  -----------------bkash payment ----------------
+     
+// ----------------------------------------------
+
 const getMyPayment = async (req:Request, res:Response) =>{
   try {
     const userEmail = req?.user?.data?.email ;
