@@ -48,6 +48,8 @@ return {
 
 } ;
 
+// ---------------------------
+
 const verifyPayment = async(paymentIntentId: string) =>{
    if (!paymentIntentId) {
     throw new Error("PaymentIntent ID is required")
@@ -59,31 +61,10 @@ const verifyPayment = async(paymentIntentId: string) =>{
   )
 
   if (paymentIntent.status !== "succeeded") {
-    throw new Error("Payment not successful")
+    throw new Error("Payment not successful or payment failed")
   }
 
-  // 🔄 UpdatePayment status
-   const updatedPayment = await prisma.payment.update({
-    where: {
-      transaction_id: paymentIntentId,
-    },
-    data: {
-      status: paymentStatus.SUCCESS,
-      raw_response: JSON.parse(JSON.stringify(paymentIntent)),
-    },
-  })
-
-  // (Optional but recommended)
-  await prisma.order.update({
-    where: {
-      id: updatedPayment.order_id,
-    },
-    data: {
-      status: "PAID",
-    },
-  })
-
-    return updatedPayment
+    return {success:true}
 
 }
 
@@ -97,21 +78,56 @@ const webhookIntrigation = async(payload:any,sig:any)=>{
   
   // console.log({event}) ;
 
+
+
    switch (event.type) {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object;
-      console.log('PaymentIntent was successful!');
+
+       // Update payment record
+      await prisma.payment.updateMany({
+        where: { transaction_id: paymentIntent.id },
+        data: {
+          status: paymentStatus.SUCCESS,
+          raw_response: JSON.parse(JSON.stringify(paymentIntent)),
+        },
+      });
+
+       // Update order record
+      const paymentRecord = await prisma.payment.findUnique({
+        where: { transaction_id: paymentIntent.id },
+      });
+
+      if (paymentRecord) {
+        await prisma.order.update({
+          where: { id: paymentRecord.order_id },
+          data: { status: "PAID" },
+        });
+      }
+
+      // console.log('PaymentIntent was successful!');
       break;
+
+
 
     case 'payment_method.attached':
       const paymentMethod = event.data.object;
+
       console.log('PaymentMethod was attached to a Customer!');
       break;
+
+
+
     // ... handle other event types
 
     case "payment_intent.payment_failed": {
       const paymentIntent = event.data.object as Stripe.PaymentIntent
-      console.log("Payment failed:", paymentIntent.id)
+
+      await prisma.payment.updateMany({
+        where: { transaction_id: paymentIntent.id },
+        data: { status: paymentStatus.FAILED },
+      });
+
       break
     }  
 
