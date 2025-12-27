@@ -29,6 +29,7 @@ const routerModules=[
         path : "/payment",
         routerSource : paymentRouter 
     }
+   
 ]
 
 routerModules.forEach(route=>router.use(route.path,route.routerSource))

@@ -86,7 +86,46 @@ const verifyPayment = async(paymentIntentId: string) =>{
     return updatedPayment
 
 }
+
+// using webhook to control payment system 
+
+const webhookIntrigation = async(payload:any,sig:any)=>{
+  const endpointSecret : string =config.stripe_webhooks_secret as string ;
+
+  
+  const event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+  
+  // console.log({event}) ;
+
+   switch (event.type) {
+    case 'payment_intent.succeeded':
+      const paymentIntent = event.data.object;
+      console.log('PaymentIntent was successful!');
+      break;
+
+    case 'payment_method.attached':
+      const paymentMethod = event.data.object;
+      console.log('PaymentMethod was attached to a Customer!');
+      break;
+    // ... handle other event types
+
+    case "payment_intent.payment_failed": {
+      const paymentIntent = event.data.object as Stripe.PaymentIntent
+      console.log("Payment failed:", paymentIntent.id)
+      break
+    }  
+
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  return {receive:true}
+  
+}
+
+
 export const paymentServices = {
     paymentInitialization,
-    verifyPayment
+    verifyPayment,
+    webhookIntrigation
 }

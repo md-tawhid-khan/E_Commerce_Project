@@ -40,9 +40,29 @@ const verifyPayment = async(req:Request,res:Response)=>{
     })
   }
 
+} ;
+
+const webhookIntrigation = async(req:Request,res:Response) =>{
+try{
+  const sig = req.headers['stripe-signature'];
+  const data = req.body ;
+
+  const result= await paymentServices.webhookIntrigation(data,sig) ;
+  res.status(200).json({
+      success: true,
+      message: "Payment verified successfully",
+      data: result,
+    })
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    })
+  }
 }
 
 export const paymentController ={
     paymentInitialization,
-    verifyPayment
+    verifyPayment,
+    webhookIntrigation
 } ;
