@@ -1,22 +1,26 @@
 import { prisma } from "../../../lib/prisma";
 
-const createOrder = async (orderData:any) =>{
-
-    // console.log(orderData) ;
-
-    const orderInfo = {
-        user_id : orderData.user_id ,
-        totalAmount : 0 
-    }
-
-  
-
+const createOrder = async (orderData:any, userEmail : string) =>{
     
-
-    try {
+    
         const result = await prisma.$transaction(async (tx)=>{
+        const existUser= await tx.user.findUnique({
+            where:{
+                email:userEmail 
+            } 
+        }) ;
+
+     if(!existUser){
+        throw new Error("you are not authorized user") ;
+     }
+
+     
+
          const generateOrder = await tx.order.create({
-            data:orderInfo
+            data:{
+                user_id:existUser.id ,
+                totalAmount: 0 
+            }
          }) ;
 
          const orderItemsInfo =  orderData.products.map((product:any)=>({
@@ -27,7 +31,7 @@ const createOrder = async (orderData:any) =>{
         subtotal:product.quantity * product.price 
     })) ;
 
-    const generatedOrderItems = await tx.orderItem.createMany({
+     await tx.orderItem.createMany({
         data:orderItemsInfo
     }) ;
     
@@ -49,13 +53,10 @@ const createOrder = async (orderData:any) =>{
          
          return updateOrder ;
     }) ;
+
     return result ;
         
-    } catch (error) {
-        console.log(error) ;
-    }
-
-    
+  
 } ;
 
 export const orderServices = {

@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { orderServices } from "./order.services";
 import status from "http-status";
+import { userInformation } from "../../middleware/authTokenValidation";
 
 const createOrder = async (req:Request,res:Response)=>{
     try {
         const orderData = req.body.data ;
-        const result = await orderServices.createOrder(orderData)
+         const userEmail = userInformation?.data?.email ;
+         
+        const result = await orderServices.createOrder(orderData,userEmail)
           res.send({
         status:status.OK,
         success:true,

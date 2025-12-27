@@ -22,7 +22,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  order Order ?
+  order Order []
 
   @@map("users")
 }
@@ -45,7 +45,7 @@ model Product {
 
 model Order {
   id  String @id @default(uuid())
-  user_id String @unique
+  user_id String 
   user User @relation(fields: [user_id],references: [id])
   totalAmount Int 
   status  orderStatus @default(PENDING)
