@@ -7,12 +7,12 @@ const router = Router() ;
 
 router.post('/create',authTokenValidation(userRole.ADMIN), productController.createProduct) ;
 
-router.get('/' , productController.getAllProduct) ;
+router.get('/',authTokenValidation(userRole.USER,userRole.ADMIN) , productController.getAllProduct) ;
 
-router.get('/:id', productController.getSingleProduct) ;
+router.get('/:id',authTokenValidation(userRole.USER,userRole.ADMIN), productController.getSingleProduct) ;
 
-router.patch('/update/:id', productController.updateProduct) ;
+router.patch('/update/:id',authTokenValidation(userRole.ADMIN), productController.updateProduct) ;
 
-router.delete('/delete/:id', productController.deleteProduct) ;
+router.delete('/delete/:id',authTokenValidation(userRole.ADMIN), productController.deleteProduct) ;
 
 export const productRouter = router ;

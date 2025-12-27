@@ -4,7 +4,7 @@ import config from '../config';
 
 
 
-const authTokenValidation= (userRole:string)=>{
+const authTokenValidation= (...userRoles:string[])=>{
   return async(req:Request & {user?:any},res:Response,next:NextFunction)=>{
        try {
 
@@ -21,7 +21,7 @@ const authTokenValidation= (userRole:string)=>{
 
        req.user=verifiedUser ;
 
-       if(userRole !== verifiedUser?.data?.role){
+       if(userRoles && !userRoles.includes(verifiedUser?.data?.role )){
          return res.status(403).json({
           success: false,
           message: "Forbidden: You do not have access",
