@@ -7,7 +7,7 @@ const router = Router() ;
 
 router.post('/create',authTokenValidation(userRole.ADMIN), productController.createProduct) ;
 
-router.get('/',authTokenValidation(userRole.USER,userRole.ADMIN) , productController.getAllProduct) ;
+router.get('/', productController.getAllProduct) ;
 
 router.get('/:id',authTokenValidation(userRole.USER,userRole.ADMIN), productController.getSingleProduct) ;
 

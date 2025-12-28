@@ -1,22 +1,36 @@
+import bodyParser  from 'body-parser';
+
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-
 
 import status from 'http-status';
 import cookieParser from 'cookie-parser' ;
 import router from './app/routers';
-import { paymentRouter } from './app/modules/payment/payment.router';
-// import router from './app/routers';
+import { paymentController } from './app/modules/payment/payment.controller';
+
 
 
 const app:Application=express() ;
-app.use(cors()) ;
+
+app.use(cors({
+       origin: "http://localhost:3000", 
+    credentials: true,}
+ )) ;
+
 app.use(cookieParser())
 
-app.use("/api/payment", paymentRouter)
+
+app.post(
+  "/api/v1/payment/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  paymentController.webhookIntrigation
+);
+
 
 app.use(express.json()) ;
 app.use(express.urlencoded({extended:true})) ;
+
+
 
 
 

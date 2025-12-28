@@ -5,10 +5,11 @@ import status from "http-status";
 
 const createOrder = async (req:Request,res:Response)=>{
     try {
-        const orderData = req.body.data ;
+        const {products} =await req.body.data ;
+        
          const userEmail =  (req as any).user?.data?.email;
          
-        const result = await orderServices.createOrder(orderData,userEmail)
+        const result = await orderServices.createOrder(products,userEmail)
           res.send({
         status:status.OK,
         success:true,

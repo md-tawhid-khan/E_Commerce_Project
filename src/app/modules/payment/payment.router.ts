@@ -1,5 +1,6 @@
-// import express from "express"
 import bodyParser from "body-parser"
+// import express from "express"
+
 import { Router } from "express";
 import { paymentController } from "./payment.controller";
 import authTokenValidation from "../../middleware/authTokenValidation";
@@ -11,8 +12,7 @@ router.post('/payment_intents',paymentController.paymentInitialization) ;
 
 router.post('/verify',paymentController.verifyPayment) ;
 
-router.post('/webhook',  bodyParser.raw({ type: "application/json" }),paymentController.webhookIntrigation) ;
-
 router.get('/my-payment', authTokenValidation(userRole.USER),paymentController.getMyPayment) ;
 
 export const paymentRouter = router ;
+

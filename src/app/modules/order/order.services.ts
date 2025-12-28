@@ -4,6 +4,7 @@ import { prisma } from "../../../lib/prisma";
 const createOrder = async (orderData:any, userEmail : string) =>{
     
     
+    
         const result = await prisma.$transaction(async (tx)=>{
         const existUser= await tx.user.findUnique({
             where:{
@@ -24,7 +25,7 @@ const createOrder = async (orderData:any, userEmail : string) =>{
             }
          }) ;
 
-         const orderItemsInfo =  orderData.products.map((product:any)=>({
+         const orderItemsInfo =  orderData?.products?.map((product:any)=>({
         order_id:generateOrder.id,
         product_id:product.product_id,
         quantity:product.quantity,

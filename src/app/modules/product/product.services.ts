@@ -24,7 +24,7 @@ const createProduct = async (payload:TProduct) => {
 // get all product ------
  
 const getAllProduct = async()=>{
-    console.log("get all products") ;
+    
     const result = await prisma.product.findMany();
     return result ;
 } ;

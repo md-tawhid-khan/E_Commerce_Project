@@ -4,7 +4,7 @@ export const generateToken = async(payload:any ) =>{
     const secret = config.secret as string;
     const token =  jwt.sign({
   data: payload
-}, secret, { expiresIn: '1h'});
+}, secret, { expiresIn: '7d'});
 
 return token ;
 

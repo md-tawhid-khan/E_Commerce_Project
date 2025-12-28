@@ -71,8 +71,7 @@ const webhookIntrigation = async(payload:any,sig:any)=>{
 
   
   const event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
-  
-  // console.log({event}) ;
+ 
 
 
 
@@ -95,13 +94,34 @@ const webhookIntrigation = async(payload:any,sig:any)=>{
       });
 
       if (paymentRecord) {
-        await prisma.order.update({
+     const updatedOrder=   await prisma.order.update({
           where: { id: paymentRecord.order_id },
           data: { status: "PAID" },
         });
+
+        
+
+        const orderItems = await prisma.orderItem.findMany({
+  where: { order_id: updatedOrder.id }
+})
+
+for (const item of orderItems) {
+  await prisma.product.update({
+    where: {
+      id: item.product_id
+    },
+    data: {
+      stock: {
+        decrement: item.quantity
+      }
+    }
+  })
+}
+
+
       }
 
-      // console.log('PaymentIntent was successful!');
+    
       break;
 
 

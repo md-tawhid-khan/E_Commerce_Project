@@ -31,7 +31,7 @@ const verifyPayment = async(req:Request,res:Response)=>{
 
     const result = await paymentServices.verifyPayment(paymentIntent)
 
-    console.log(result) ;
+  
 
     res.status(200).json({
       success: true,
@@ -59,8 +59,10 @@ try{
       data: result,
     })
   } catch (error: any) {
+    console.log(error) ;
     res.status(400).json({
       success: false,
+    
       message: error.message,
     })
   }
