@@ -5,7 +5,7 @@ import status from "http-status";
 const createProduct = async (req:Request,res:Response)=>{
     try {
         const productData = req.body.data ;
-        // console.log(productData) ;
+        
         const result = await productServices.createProduct(productData) ;
         res.send({
         status:status.OK,
@@ -23,7 +23,8 @@ const createProduct = async (req:Request,res:Response)=>{
     }
 } ;
 
-// get all product ----------
+
+
 
 const getAllProduct = async (req:Request,res:Response)=>{
     try {
@@ -44,7 +45,6 @@ const getAllProduct = async (req:Request,res:Response)=>{
     }
 }
 
-// get single product -----------
 
 const getSingleProduct = async(req:Request, res:Response) => {
      try {
@@ -67,7 +67,6 @@ const getSingleProduct = async(req:Request, res:Response) => {
      }
 } ;
 
-// udpate product --------
 
 const updateProduct = async(req:Request,res:Response)=>{
     try {
@@ -91,7 +90,6 @@ const updateProduct = async(req:Request,res:Response)=>{
     }
 }
 
-// delete product --------------
 
 const deleteProduct = async (req:Request, res:Response)=>{
     try {

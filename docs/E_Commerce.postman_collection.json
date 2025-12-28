@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "13095618-2491-4799-9d97-36232c79a308",
+		"name": "E_Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40269344"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"data\":{\r\n    \"name\" : \"tawhid3\",\r\n    \"email\" : \"md.tawhid.khan19983@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\" :{\r\n        \"email\":\"md.tawhid.khan1998@gmail.com\",\r\n        \"password\" : \"admin1234\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "create_product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5hbWUiOiJNZCBUb3VoZWQgU29ya2VyIiwiZW1haWwiOiJtZC50YXdoaWQua2hhbjE5OThAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc2Njg0MzYzOSwiZXhwIjoxNzY2ODQ3MjM5fQ.FTjWHjpTD3JUBiUv5oT3KcYJqsy9HuhI3L8eqj46z4Y",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":{\r\n        \"name\" : \"mobile45678\",\r\n        \"sku\"  : \"mobile12345678\",\r\n        \"description\" : \"this is mobile product\",\r\n        \"price\" : 21000,\r\n        \"stock\" : 25 ,\r\n        \"status\" : \"ACTIVE\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":{\r\n        \"name\":\"mobile1237\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/update/45875141-7b0d-490e-854c-2e957bb4375e",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"update",
+								"45875141-7b0d-490e-854c-2e957bb4375e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/delete/45875141-7b0d-490e-854c-2e957bb4375e",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"delete",
+								"45875141-7b0d-490e-854c-2e957bb4375e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_all_product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5hbWUiOiJ0YXdoaWQzIiwiZW1haWwiOiJtZC50YXdoaWQua2hhbjE5OTgzQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIn0sImlhdCI6MTc2NjgyMzI5NywiZXhwIjoxNzY2ODI2ODk3fQ.cp7X77As7HwT4ShJAGc3hTvNwbrj2QuVBk-2gmIfLNg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_single_product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/product/45875141-7b0d-490e-854c-2e957bb4375e",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"45875141-7b0d-490e-854c-2e957bb4375e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "create_order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":{\r\n        \"products\":[{\r\n            \"product_id\" : \"ca3bb8ee-d64d-4356-8655-f8827dac6bd6\",\r\n        \"quantity\" : 4 ,\r\n        \"price\" : 40000,\r\n        \"subtotal\" : 100000 \r\n        },\r\n        {\r\n            \"product_id\" : \"7d7b07de-368a-47ed-b8a0-8830d59c4556\",\r\n        \"quantity\" : 4 ,\r\n        \"price\" : 40000,\r\n        \"subtotal\" : 100000 \r\n        }\r\n        ],\r\n        \"user_id\":\"af9a013e-f5a0-4918-adcf-e1c163245dcc\"\r\n        \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/order/create-Order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order",
+								"create-Order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my_order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/order/my-order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order",
+								"my-order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "init_payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/payment/payment_intents?order_id=86cd383a-44bf-4996-b8a4-775318df4d03",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payment",
+								"payment_intents"
+							],
+							"query": [
+								{
+									"key": "order_id",
+									"value": "86cd383a-44bf-4996-b8a4-775318df4d03"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my_payment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/payment/my-payment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"payment",
+								"my-payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": ""
+		},
+		{
+			"key": "Admin_Token",
+			"value": ""
+		},
+		{
+			"key": "User_Token",
+			"value": ""
+		}
+	]
+}

@@ -7,7 +7,7 @@ const paymentInitialization = async(req:Request, res:Response) =>{
     try {
       
         const orderId=req.query.order_id as string ;
-       
+        
         const result = await paymentServices.paymentInitialization(orderId);
           res.send({
         status:status.OK,
@@ -59,18 +59,13 @@ try{
       data: result,
     })
   } catch (error: any) {
-    console.log(error) ;
+    
     res.status(400).json({
       success: false,
-    
       message: error.message,
     })
   }
 } ;
-
-//  -----------------bkash payment ----------------
-     
-// ----------------------------------------------
 
 const getMyPayment = async (req:Request, res:Response) =>{
   try {

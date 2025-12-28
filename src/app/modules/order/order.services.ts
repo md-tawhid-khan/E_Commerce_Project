@@ -3,8 +3,6 @@ import { prisma } from "../../../lib/prisma";
 
 const createOrder = async (orderData:any, userEmail : string) =>{
     
-    
-    
         const result = await prisma.$transaction(async (tx)=>{
         const existUser= await tx.user.findUnique({
             where:{
@@ -16,7 +14,7 @@ const createOrder = async (orderData:any, userEmail : string) =>{
         throw new Error("you are not authorized user") ;
      }
 
-// start create order page generate 
+
 
          const generateOrder = await tx.order.create({
             data:{
@@ -33,6 +31,8 @@ const createOrder = async (orderData:any, userEmail : string) =>{
         subtotal:product.quantity * product.price  
     })) ;
 
+    
+
      await tx.orderItem.createMany({
         data:orderItemsInfo
     }) ;
@@ -42,7 +42,7 @@ const createOrder = async (orderData:any, userEmail : string) =>{
   _sum: { subtotal: true },
 })
 
-// console.log(calculateTotalAmount) ;
+
 
     const updateOrder = await tx.order.update({
         where:{
@@ -63,7 +63,7 @@ const createOrder = async (orderData:any, userEmail : string) =>{
 } ;
 
 const getMyOrder = async(userEmail:string)=>{
-    // console.log(userEmail) ;
+   
     const isExistUser = await prisma.user.findUnique({
         where:{
             email:userEmail

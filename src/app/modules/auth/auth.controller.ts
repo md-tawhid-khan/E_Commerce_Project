@@ -7,6 +7,7 @@ const authLongin = async (req:Request,res:Response) =>{
         const loginData = req.body.data ;
     
     const result = await authServices.authLongin(loginData);
+  
     res.cookie("accessToken", result.accessToken, {
   httpOnly: true,
   secure: false,

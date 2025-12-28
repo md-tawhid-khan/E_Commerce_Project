@@ -7,6 +7,8 @@ const stripe = new Stripe(config.stripe_secret as string);
 
 const paymentInitialization = async(orderId:string)=>{
 
+
+
     const orderInfo = await prisma.order.findFirst({
         where:{
             id:orderId
@@ -16,6 +18,8 @@ const paymentInitialization = async(orderId:string)=>{
   throw new Error("Order ID is missing");
 }
 
+
+
     const paymentIntent: Stripe.Response<Stripe.PaymentIntent> = await stripe.paymentIntents.create({
   amount: orderInfo?.totalAmount * 100 as number,
   currency: 'usd',
@@ -24,7 +28,9 @@ const paymentInitialization = async(orderId:string)=>{
   },
 });
 
-// console.log(paymentIntent) ;
+
+
+
 
 const paymentInfo = await prisma.payment.create({
     data:{
@@ -36,7 +42,8 @@ const paymentInfo = await prisma.payment.create({
     }
 })
 
-// console.log(paymentInfo);
+
+
 return {
   clientSecret: paymentIntent.client_secret,
   paymentIntentId: paymentIntent.id,
@@ -51,7 +58,7 @@ const verifyPayment = async(paymentIntentId: string) =>{
     throw new Error("PaymentIntent ID is required")
   }
 
-  //  Verify from Stripe
+  
   const paymentIntent = await stripe.paymentIntents.retrieve(
     paymentIntentId
   )
@@ -64,7 +71,7 @@ const verifyPayment = async(paymentIntentId: string) =>{
 
 }
 
-// using webhook to control payment system 
+
 
 const webhookIntrigation = async(payload:any,sig:any)=>{
   const endpointSecret : string =config.stripe_webhooks_secret as string ;
@@ -79,7 +86,7 @@ const webhookIntrigation = async(payload:any,sig:any)=>{
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object;
 
-       // Update payment record
+ 
       await prisma.payment.updateMany({
         where: { transaction_id: paymentIntent.id },
         data: {
@@ -88,7 +95,6 @@ const webhookIntrigation = async(payload:any,sig:any)=>{
         },
       });
 
-       // Update order record
       const paymentRecord = await prisma.payment.findUnique({
         where: { transaction_id: paymentIntent.id },
       });
@@ -126,16 +132,6 @@ for (const item of orderItems) {
 
 
 
-    case 'payment_method.attached':
-      const paymentMethod = event.data.object;
-
-      console.log('PaymentMethod was attached to a Customer!');
-      break;
-
-
-
-    // ... handle other event types
-
     case "payment_intent.payment_failed": {
       const paymentIntent = event.data.object as Stripe.PaymentIntent
 
@@ -148,22 +144,14 @@ for (const item of orderItems) {
     }  
 
     default:
-      console.log(`Unhandled event type ${event.type}`);
+      
   }
 
   return {receive:true}
   
 } ;
 
-//  --------- bkash payment intregation   ------------------
 
-const createBkashPayment=async()=>{
-  console.log("create payment")
-}
-
-
-
-// ----------------------------
 
 const getMyPayment = async (userEmail:string) =>{
   const isExistUser=await prisma.user.findUnique({
@@ -195,5 +183,5 @@ export const paymentServices = {
     verifyPayment,
     webhookIntrigation,
     getMyPayment,
-    createBkashPayment
+    
 }

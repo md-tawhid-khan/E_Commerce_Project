@@ -7,7 +7,7 @@ import { TUser } from "./user.interface";
 
 
 const createUser= async (user:TUser)=>{
-    // console.log(user) ;
+  
     const {password,email} = user ;
 
     const isEmailExist =await prisma.user.findUnique({where:{

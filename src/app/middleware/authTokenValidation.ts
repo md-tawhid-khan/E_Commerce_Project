@@ -4,7 +4,7 @@ import config from '../config';
 import status from 'http-status';
 
 
-// export let userInformation : any ; 
+ 
 
 const authTokenValidation= (...userRoles:string[])=>{
 
@@ -20,7 +20,7 @@ const authTokenValidation= (...userRoles:string[])=>{
 
        const verifiedUser=jwt.verify(token,secret as Secret) as JwtPayload;
        
-      //  console.log(verifiedUser) ;
+     
 
        req.user=verifiedUser ;
 

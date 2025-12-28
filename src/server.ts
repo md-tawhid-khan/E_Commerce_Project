@@ -23,7 +23,7 @@ process.on('uncaughtException',(error)=>{
 }) ;
 
 process.on('unhandledRejection',(error)=>{
-   console.log(error);
+   
    exitHandler() ;
 })
 

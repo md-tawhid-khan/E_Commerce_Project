@@ -1,4 +1,5 @@
-import { productStatus } from "../../../../generated/prisma/enums"
+import { productStatus } from "../../../generated/prisma/enums";
+
 
 export type TProduct = {
     name : string ,

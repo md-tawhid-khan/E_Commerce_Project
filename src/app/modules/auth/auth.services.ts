@@ -28,7 +28,7 @@ const authLongin= async (payload:TAuth) =>{
      
  const accessToken =await generateToken(payloadData);
  
-//  console.log(accessToken) ;
+
  
     return {
         accessToken
