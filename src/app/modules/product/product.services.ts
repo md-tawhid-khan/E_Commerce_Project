@@ -21,7 +21,7 @@ const createProduct = async (payload:TProduct) => {
      return result ;
 } ;
 
-// get all product ------
+
  
 const getAllProduct = async()=>{
     
@@ -29,10 +29,13 @@ const getAllProduct = async()=>{
     return result ;
 } ;
 
-// get single product ----------
 
-const getSingleProduct = async(productId :string) =>{
-    const result = await prisma.product.findUniqueOrThrow({
+
+const getSingleProduct = async(productId:string) =>{
+
+    
+
+    const result = await prisma.product.findUnique({
         where:{
             id : productId 
         }
@@ -40,11 +43,10 @@ const getSingleProduct = async(productId :string) =>{
     return result ;
 }
 
-// update product -------
+
 
 const updateProduct = async (payload : TUpdateProduct,productId : string) =>{
-    // console.log(payload) ;
-    // console.log(productId) ;
+    
     const result = await prisma.product.update({
         where:{
             id:productId
@@ -56,7 +58,7 @@ const updateProduct = async (payload : TUpdateProduct,productId : string) =>{
     return result ;
 }
 
-// delete product -------------
+
 
 const deleteProduct = async (productId:string) =>{
     const result = await prisma.product.delete({

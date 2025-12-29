@@ -23,20 +23,26 @@ const createOrder = async (orderData:any, userEmail : string) =>{
             }
          }) ;
 
-         const orderItemsInfo =  orderData?.products?.map((product:any)=>({
+         if (!orderData?.products?.length) {
+  throw new Error("No products found for order");
+}
+
+         const orderItemsInfo =  orderData.products.map((product:any)=>({
         order_id:generateOrder.id,
         product_id:product.product_id,
         quantity:product.quantity,
         price:product.price,
         subtotal:product.quantity * product.price  
     })) ;
-
     
-
-     await tx.orderItem.createMany({
+    
+    
+    const orderItems = await tx.orderItem.createMany({
         data:orderItemsInfo
     }) ;
-    
+
+
+
     const calculateTotalAmount  = await tx.orderItem.aggregate({
   where: { order_id:generateOrder.id},
   _sum: { subtotal: true },

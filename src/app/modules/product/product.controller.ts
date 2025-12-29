@@ -49,6 +49,7 @@ const getAllProduct = async (req:Request,res:Response)=>{
 const getSingleProduct = async(req:Request, res:Response) => {
      try {
         const productId = req.params.id as string ;
+       
         const result = await productServices.getSingleProduct(productId)
         res.send({
         status:status.OK,

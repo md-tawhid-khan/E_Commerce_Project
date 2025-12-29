@@ -194,5 +194,11 @@ Webhook Tests :
 Stripe webhook tested using Stripe CLI test events
 Handles payment success/failure
 
+## 🌐 Frontend
+
+The frontend is deployed on Vercel and can be accessed here:  
+" https://ecommerceclient-rosy.vercel.app "
+
+
 Author
 Md. Touhed Sorker

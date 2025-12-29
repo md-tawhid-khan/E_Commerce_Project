@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"data\":{\r\n    \"name\" : \"tawhid3\",\r\n    \"email\" : \"md.tawhid.khan19983@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}\r\n}",
+							"raw": "{\"data\":{\r\n    \"name\" : \"sazzad\",\r\n    \"email\" : \"mdsazzad@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,15 +24,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/v1/user/register",
-							"protocol": "http",
+							"raw": "{{url}}/user/register",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3001",
 							"path": [
-								"api",
-								"v1",
 								"user",
 								"register"
 							]
@@ -84,13 +80,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5hbWUiOiJNZCBUb3VoZWQgU29ya2VyIiwiZW1haWwiOiJtZC50YXdoaWQua2hhbjE5OThAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc2Njg0MzYzOSwiZXhwIjoxNzY2ODQ3MjM5fQ.FTjWHjpTD3JUBiUv5oT3KcYJqsy9HuhI3L8eqj46z4Y",
+								"value": "{{Admin_Token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"data\":{\r\n        \"name\" : \"mobile45678\",\r\n        \"sku\"  : \"mobile12345678\",\r\n        \"description\" : \"this is mobile product\",\r\n        \"price\" : 21000,\r\n        \"stock\" : 25 ,\r\n        \"status\" : \"ACTIVE\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"data\":{\r\n        \"name\" : \"samsungM21\",\r\n        \"sku\"  : \"mobile12345678\",\r\n        \"description\" : \"this is mobile product\",\r\n        \"price\" : 21000,\r\n        \"stock\" : 25 ,\r\n        \"status\" : \"ACTIVE\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,10 +110,16 @@
 					"name": "update_product",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin_Token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"data\":{\r\n        \"name\":\"mobile1237\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"data\":{\r\n        \"name\":\"amsungA23\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,14 +127,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/product/update/45875141-7b0d-490e-854c-2e957bb4375e",
+							"raw": "{{url}}/product/update/a2a3b84f-3a8b-42ab-8a4e-cc82d23ea685",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"product",
 								"update",
-								"45875141-7b0d-490e-854c-2e957bb4375e"
+								"a2a3b84f-3a8b-42ab-8a4e-cc82d23ea685"
 							]
 						}
 					},
@@ -142,16 +144,22 @@
 					"name": "delete_product",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin_Token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{url}}/product/delete/45875141-7b0d-490e-854c-2e957bb4375e",
+							"raw": "{{url}}/product/delete/a2a3b84f-3a8b-42ab-8a4e-cc82d23ea685",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"product",
 								"delete",
-								"45875141-7b0d-490e-854c-2e957bb4375e"
+								"a2a3b84f-3a8b-42ab-8a4e-cc82d23ea685"
 							]
 						}
 					},
@@ -164,7 +172,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5hbWUiOiJ0YXdoaWQzIiwiZW1haWwiOiJtZC50YXdoaWQua2hhbjE5OTgzQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIn0sImlhdCI6MTc2NjgyMzI5NywiZXhwIjoxNzY2ODI2ODk3fQ.cp7X77As7HwT4ShJAGc3hTvNwbrj2QuVBk-2gmIfLNg",
+								"value": "{{User_Token}}",
 								"type": "text"
 							}
 						],
@@ -192,13 +200,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/product/45875141-7b0d-490e-854c-2e957bb4375e",
+							"raw": "{{url}}/product/fcdf44c7-b7aa-4bfb-832c-1bcf5dcc63d1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"product",
-								"45875141-7b0d-490e-854c-2e957bb4375e"
+								"fcdf44c7-b7aa-4bfb-832c-1bcf5dcc63d1"
 							]
 						}
 					},
@@ -213,10 +221,16 @@
 					"name": "create_order",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"data\":{\r\n        \"products\":[{\r\n            \"product_id\" : \"ca3bb8ee-d64d-4356-8655-f8827dac6bd6\",\r\n        \"quantity\" : 4 ,\r\n        \"price\" : 40000,\r\n        \"subtotal\" : 100000 \r\n        },\r\n        {\r\n            \"product_id\" : \"7d7b07de-368a-47ed-b8a0-8830d59c4556\",\r\n        \"quantity\" : 4 ,\r\n        \"price\" : 40000,\r\n        \"subtotal\" : 100000 \r\n        }\r\n        ],\r\n        \"user_id\":\"af9a013e-f5a0-4918-adcf-e1c163245dcc\"\r\n        \r\n    }\r\n}",
+							"raw": "{\r\n    \"data\":{\r\n        \"products\":{\r\n              \"products\":[{\r\n            \"product_id\" : \"430cc47e-a6c4-4698-92d5-b512752aa5ad\",\r\n        \"quantity\" : 4,\r\n        \"price\" : 21000        \r\n        },\r\n        {\r\n            \"product_id\" : \"9d20397b-6b35-4d8b-8f3a-95573230d799\",\r\n        \"quantity\" : 4  ,\r\n        \"price\" : 22000     \r\n        \r\n        }\r\n        ]\r\n        }\r\n  \r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -281,7 +295,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/payment/payment_intents?order_id=86cd383a-44bf-4996-b8a4-775318df4d03",
+							"raw": "{{url}}/payment/payment_intents?order_id=ae61ce96-d573-4637-ab73-a487bdfc6279",
 							"host": [
 								"{{url}}"
 							],
@@ -292,7 +306,7 @@
 							"query": [
 								{
 									"key": "order_id",
-									"value": "86cd383a-44bf-4996-b8a4-775318df4d03"
+									"value": "ae61ce96-d573-4637-ab73-a487bdfc6279"
 								}
 							]
 						}
